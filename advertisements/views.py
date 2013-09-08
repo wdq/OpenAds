@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from advertisements.models import Advertisement, Provider
-from advertisements.decorators import superuser_or_provider
+from advertisements.decorators import superuser_or_provider, provider_access
 from advertisements.forms import AdvertisementURLForm, AdvertisementRequestForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -58,12 +58,9 @@ def providers_all(request):
         "providers": providers,
     })
 
-@superuser_or_provider
+@provider_access
 @login_required
 def view_provider_statistics(request, provider_pk):
-    if not request.user.is_superuser:
-        if request.user.provider.pk != long(provider_pk):
-            raise Http404
     provider = get_object_or_404(Provider, pk=provider_pk)
 
     return render(request, 'advertisements/statistics/provider_statistics.html', {
@@ -74,7 +71,7 @@ def view_provider_statistics(request, provider_pk):
     })
 
 
-@superuser_or_provider
+@provider_access
 @login_required
 def view_advert_statistics(request, advert_pk):
     if not request.user.is_superuser:
