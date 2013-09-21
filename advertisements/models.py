@@ -43,10 +43,15 @@ def get_file_path(instance, filename):
 class Advertisement(models.Model):
     TOP_AD = 't'
     SIDE_AD = 's'
+    QCURRENCIES_AD = 'q'
+    THEPRIME_SIDE_AD = 'p'
 
     AD_TYPES = (
         (TOP_AD, 'Banner Ad'),
         (SIDE_AD, 'Side Ad'),
+        (QCURRENCIES_AD, 'qCurrencies Ad'),
+        (THEPRIME_SIDE_AD, 'The Prime Side Ad'),
+
     )
 
     ACTIVE = 'a'
