@@ -44,6 +44,26 @@ def side_ads(request):
         "adverts": adverts,
     })
 
+@minified_response
+def qcurrencies_ad(request):
+    if not Advertisement.objects.filter(ad_type=Advertisement.QCURRENCIES_AD, status=Advertisement.ACTIVE).exists():
+        return HttpResponse("No adverts") # TODO: Placeholder
+    advert = Advertisement.objects.filter(ad_type=Advertisement.QCURRENCIES_AD, status=Advertisement.ACTIVE).order_by('?')[0]
+
+    return render(request, 'advertisements/qcurrencies_ad.html', {
+        "advert": advert,
+    })
+
+@minified_response
+def theprime_side_ad(request):
+    if not Advertisement.objects.filter(ad_type=Advertisement.THEPRIME_SIDE_AD, status=Advertisement.ACTIVE).exists():
+        return HttpResponse("No adverts") # TODO: Placeholder
+    advert = Advertisement.objects.filter(ad_type=Advertisement.THEPRIME_SIDE_AD, status=Advertisement.ACTIVE).order_by('?')[0]
+
+    return render(request, 'advertisements/theprime_side_ad.html', {
+        "advert": advert,
+    })
+
 
 @superuser_or_provider
 @login_required
