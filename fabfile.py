@@ -12,7 +12,7 @@ site_settings = {
     "settings_local": 'openads/local_settings.py',
     "application_name": 'openads',
     "git_location": "https://github.com/wdq/OpenAds.git",
-    "git_branch": "develop",
+    "git_branch": "master",
 
     # Defaults
     "static_dir": "all_static",
